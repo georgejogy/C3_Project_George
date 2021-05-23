@@ -9,6 +9,7 @@ public class Restaurant {
     public LocalTime openingTime;
     public LocalTime closingTime;
     private List<Item> menu = new ArrayList<Item>();
+    private int TotalPrice = 0;
 
     public Restaurant(String name, String location, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
@@ -66,4 +67,17 @@ public class Restaurant {
         return name;
     }
 
+    public void calculatePriceOnSelecting(String ItemName){
+        Item itemName = findItemByName(ItemName);
+        TotalPrice = TotalPrice + itemName.getPrice();
+    }
+
+    public void calculatePriceAfterDeselecting(String ItemName){
+        Item itemName = findItemByName(ItemName);
+        TotalPrice = TotalPrice - itemName.getPrice();
+    }
+
+    public int getTotalPrice(){
+        return this.TotalPrice;
+    }
 }
