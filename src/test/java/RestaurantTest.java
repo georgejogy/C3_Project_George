@@ -78,4 +78,31 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //<<<<<<<<<<<<<<<<<<<<<<<PRICING>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    @Test
+    public void selecting_the_items_should_return_the_correct_price()
+    {
+        restaurant.addToMenu("Sweet corn soup",119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+
+        restaurant.calculatePriceOnSelecting("Sweet corn soup");
+        restaurant.calculatePriceOnSelecting("Vegetable lasagne");
+        int finalPrice = restaurant.getTotalPrice();
+        assertEquals(finalPrice,388);
+    }
+
+    @Test
+    public void deselecting_the_items_after_selecting_should_decrease_the_total_price()
+    {
+        restaurant.addToMenu("Sweet corn soup",119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+
+        restaurant.calculatePriceOnSelecting("Sweet corn soup");
+        restaurant.calculatePriceOnSelecting("Vegetable lasagne");
+        restaurant.calculatePriceAfterDeselecting("Sweet corn soup");
+        int finalPrice = restaurant.getTotalPrice();
+        assertEquals(finalPrice,269);
+    }
 }
